@@ -9,19 +9,7 @@ A **serverless airline ticket booking system** built on AWS where users can:
 ---
 
 ## 📌 Architecture
-
-## 📌 Architecture
-
-```mermaid
-flowchart TD
-    User[User] --> CloudFront[CloudFront (CDN + SSL)]
-    CloudFront --> S3[S3 (Frontend Website)]
-    User --> APIGW[API Gateway (Custom Domain)]
-    APIGW --> Lambda[Lambda Functions]
-    Lambda --> DDB1[(Flights Table)]
-    Lambda --> DDB2[(Bookings Table)]
-    Lambda --> SES[SES (Email Service)]
-    Lambda --> SNS[SNS (SMS Service)]
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/2890656f-f80b-4d4a-a09f-ae1f1055ed56" />
 
 ---
 
