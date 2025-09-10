@@ -12,15 +12,14 @@ A **serverless airline ticket booking system** built on AWS where users can:
 
 ```mermaid
 flowchart TD
-  User[User] -->|Search/Book| CloudFront
-  CloudFront --> S3[S3 (Frontend Website)]
-  CloudFront --> APIGW[API Gateway]
-  APIGW --> Lambda[Lambda Functions]
-  Lambda --> DDB1[(DynamoDB Flights Table)]
-  Lambda --> DDB2[(DynamoDB Bookings Table)]
-  Lambda --> SES[Amazon SES (Email)]
-  Lambda --> SNS[Amazon SNS (SMS)]
-```
+    User[User] --> CloudFront[CloudFront (CDN + SSL)]
+    CloudFront --> S3[S3 (Frontend Website)]
+    User --> APIGW[API Gateway (Custom Domain)]
+    APIGW --> Lambda[Lambda Functions]
+    Lambda --> DDB1[(Flights Table)]
+    Lambda --> DDB2[(Bookings Table)]
+    Lambda --> SES[SES (Email Service)]
+    Lambda --> SNS[SNS (SMS Service)]
 
 ---
 
