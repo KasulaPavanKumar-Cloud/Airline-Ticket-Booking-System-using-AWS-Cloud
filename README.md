@@ -10,6 +10,8 @@ A **serverless airline ticket booking system** built on AWS where users can:
 
 ## 📌 Architecture
 
+## 📌 Architecture
+
 ```mermaid
 flowchart TD
     User[User] --> CloudFront[CloudFront (CDN + SSL)]
