@@ -1,40 +1,79 @@
-# ✈️ Airline Ticket Booking System (AWS Cloud Project)
+# ✈️ Serverless Airline Booking System
 
-## 📌 Overview
-This project is a **cloud-based Airline Ticket Booking System** built on AWS.  
-It allows users to search for flights, book tickets, and receive automatic confirmation emails.
+A **serverless airline ticket booking system** built on AWS where users can:
+✅ Search available flights
+✅ Book tickets
+✅ Receive confirmation via **Email (SES)** and **SMS (SNS)**
+✅ Access via a **custom domain + SSL (Route 53 + CloudFront)**
 
-## 🛠️ AWS Services Used
-- **Amazon S3** → Hosts the static website (frontend)  
-- **Amazon API Gateway** → Exposes REST APIs for frontend-backend communication  
-- **AWS Lambda (Python)** → Serverless backend for booking & search functionality  
-- **Amazon DynamoDB** → NoSQL database for storing flights & bookings  
-- **Amazon SES** → Sends email confirmations after booking  
+---
+
+## 📌 Architecture
+
+```mermaid
+flowchart TD
+  User[User] -->|Search/Book| CloudFront
+  CloudFront --> S3[S3 (Frontend Website)]
+  CloudFront --> APIGW[API Gateway]
+  APIGW --> Lambda[Lambda Functions]
+  Lambda --> DDB1[(DynamoDB Flights Table)]
+  Lambda --> DDB2[(DynamoDB Bookings Table)]
+  Lambda --> SES[Amazon SES (Email)]
+  Lambda --> SNS[Amazon SNS (SMS)]
+```
+
+---
+
+## ⚙️ Tech Stack
+
+* **Frontend**: HTML, CSS, JavaScript (Hosted on S3 + CloudFront)
+* **Backend**: AWS Lambda + API Gateway
+* **Database**: DynamoDB (Flights & Bookings)
+* **Notifications**: SES (Email), SNS (SMS)
+* **Domain & Security**: Route 53, ACM, CloudFront (Custom Domain + SSL)
+
+---
 
 ## 🚀 Features
-- Search for available flights (From, To, Date)  
-- Book a ticket with name & email  
-- Automatic **booking confirmation email** (SES)  
-- Updates **available seats** in DynamoDB  
-- Scalable, serverless, and cost-efficient architecture  
+
+* Flight search by **Source, Destination, Date**
+* Ticket booking with **unique Booking ID**
+* **Email/SMS notifications** after successful booking
+* **Secure domain access** ([https://pa1all.space](https://pa1all.space))
+
+---
+
+## 📚 Learnings & Challenges
+
+* Configuring **custom domains and SSL certificates** in Route 53 & ACM
+* Handling DynamoDB **conditional updates** for seat availability
+* Debugging IAM permission issues with Lambda
+* Received **valuable guidance from mentor/sir** to fix configuration and policy errors
+
+---
+
+## 🛠️ Setup Instructions
+
+1. Clone the repo:
+
+   ```bash
+   git clone https://github.com/pavankumarkasula73/Airline-Booking-System.git
+   ```
+2. Deploy backend with Lambda + API Gateway.
+3. Set up DynamoDB tables (`Flights`, `Bookings`).
+4. Configure SES (verify sender/recipient email).
+5. Add your domain in Route 53 and connect via CloudFront + ACM.
+6. Update frontend (`index.html`) with your API URL.
+
+---
+
+## 📸 Screenshots
+<img width="1572" height="1018" alt="image" src="https://github.com/user-attachments/assets/9bb551c8-0e1d-4dba-aa06-62ce7015e0f0" />
+<img width="1491" height="654" alt="image" src="https://github.com/user-attachments/assets/a0f09323-cd79-4e59-88bd-356dc7725b30" />
 
 
-## 📸 Architecture
-![Architecture Diagram](<img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/d6734a03-93ae-41d0-bd66-18ed32de9325" />
-)
+---
 
-## 🧠 Learnings
-- Learned AWS **S3 hosting**, **API Gateway + Lambda integration**, and **DynamoDB schema design**  
-- Understood how to fix **CORS issues** by enabling headers in API Gateway & Lambda  
-- Learned **SES sandbox restrictions** (only verified emails work in testing)  
-- Strengthened debugging skills using **CloudWatch logs** & API Gateway execution logs  
+## 📌 Status
 
-## 🚧 Challenges
-- At first, the **confirmation email was not delivered** after booking.  
-  - My guide suggested two checks:  
-    1. Try hosting frontend on **EC2** to test if the issue was with S3.  
-    2. Verify the **API Gateway invoke URL** in the frontend code.  
-  - This helped me identify the problem and fix it step by step.  
-
-
-👨‍💻 Developed by **K. Pavan Kumar**  
+✅ Working and hosted at: **[https://pa1all.space](https://pa1all.space)**
